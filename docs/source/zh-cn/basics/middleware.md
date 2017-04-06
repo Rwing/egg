@@ -84,6 +84,17 @@ module.exports = {
 };
 ```
 
+我们还可以动态修改现有中间件的顺序，中间件的加载顺序和插件顺序不同，是由 `app.config.coreMiddleware` 和 `app.config.appMiddleware` 这两个数组合并而成的。
+
+```js
+// app.js
+module.exports = app => {
+  // 去除 session 中间件
+  const index = app.config.coreMiddleware.indexOf('session');
+  app.config.coreMiddleware.splice(index, 1);
+};
+```
+
 **配置项以及区分各运行环境的配置，请查看[配置](./config.md)章节。**
 
 ## 框架默认中间件
